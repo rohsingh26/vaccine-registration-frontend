@@ -3,7 +3,7 @@
 .admin-header h1 { color: var(--admin-color); }
 
 .admin-section { margin-bottom: 3rem; }
-.section-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.section-title-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; }
 
 .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .stat-card { background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
@@ -12,11 +12,30 @@
 .first-dose { border-bottom: 4px solid var(--primary); }
 .second-dose { border-bottom: 4px solid var(--success); }
 
-.filter-bar { background: #ebecf0; padding: 1rem; border-radius: 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem; }
-.filter-bar input, .filter-bar select { padding: 8px; border: 1px solid var(--border); border-radius: 4px; }
+.filter-bar { background: #ebecf0; padding: 1.5rem; border-radius: 8px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-bottom: 1rem; }
 
-.table-wrapper { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
-.admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+.filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.filter-group label { font-size: 0.85rem; font-weight: 700; color: #42526e; }
+
+.filter-bar input, .filter-bar select, .section-title-row input { 
+  padding: 10px; 
+  border: 1px solid var(--border); 
+  border-radius: 4px; 
+  width: 100%; 
+  box-sizing: border-box; 
+  font-size: 0.9rem; 
+  background-color: white;
+}
+
+.filter-actions { grid-column: span 5; display: flex; gap: 1rem; margin-top: 0.5rem; }
+.filter-actions button { padding: 10px 20px; border-radius: 4px; border: none; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+.filter-actions button:active { transform: translateY(1px); }
+
+.btn-apply { background: var(--primary, #0052cc); color: white; }
+.btn-clear { background: #dfe1e6; color: #42526e; }
+
+.table-wrapper { background: var(--white); border-radius: 10px; overflow-x: auto; box-shadow: var(--shadow); }
+.admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; min-width: 750px; }
 .admin-table th { background: #f4f5f7; padding: 15px; color: #5e6c84; font-weight: 700; }
 .admin-table td { padding: 15px; border-bottom: 1px solid var(--border); }
 
@@ -25,3 +44,17 @@
 .status-tag.first_dose_completed { background: #fff0b3; color: #856606; }
 .status-tag.all_completed { background: #e3fcef; color: #006644; }
 .aadhar-cell { font-family: monospace; color: #6b778c; }
+
+@media (max-width: 1024px) {
+  .filter-bar { grid-template-columns: repeat(2, 1fr); }
+  .filter-actions { grid-column: span 2; }
+}
+
+@media (max-width: 768px) {
+  .section-title-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
+  
+  .filter-bar { grid-template-columns: 1fr; gap: 1.2rem; padding: 1rem; }
+  .filter-actions { grid-column: span 1; flex-direction: column; }
+  .filter-actions button { width: 100%; }
+}

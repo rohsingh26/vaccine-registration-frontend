@@ -4,13 +4,21 @@ import { VACCINATION_STATUS } from '../../utils/constants';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-  // Stats State
   const [statsDate, setStatsDate] = useState('2024-11-10');
   const [stats, setStats] = useState(null);
-  
-  // Users State
+
   const [users, setUsers] = useState([]);
+
   const [filters, setFilters] = useState({
+    age: '',
+    ageMin: '',
+    ageMax: '',
+    pincode: '',
+    vaccinationStatus: ''
+  });
+
+  const [tempFilters, setTempFilters] = useState({
+    age: '',
     ageMin: '',
     ageMax: '',
     pincode: '',
@@ -39,6 +47,22 @@ const AdminDashboard = () => {
   useEffect(() => { fetchStats(); }, [statsDate]);
   useEffect(() => { fetchUsers(); }, [filters]);
 
+  const handleApplyFilters = () => {
+    setFilters(tempFilters);
+  };
+
+  const handleClearFilters = () => {
+    const cleared = {
+      age: '',
+      ageMin: '',
+      ageMax: '',
+      pincode: '',
+      vaccinationStatus: ''
+    };
+    setTempFilters(cleared);
+    setFilters(cleared);
+  };
+
   return (
     <div className="container admin-container">
       <header className="admin-header">
@@ -46,16 +70,18 @@ const AdminDashboard = () => {
         <p>Monitor registrations and vaccination progress.</p>
       </header>
 
-      {/* 1. Statistics Section */}
       <section className="admin-section">
         <div className="section-title-row">
           <h2>Daily Statistics</h2>
-          <input 
-            type="date" 
-            value={statsDate} 
-            onChange={(e) => setStatsDate(e.target.value)}
-            min="2024-11-01" max="2024-11-30"
-          />
+          <div className="filter-group">
+            <label>Select Date</label>
+            <input 
+              type="date" 
+              value={statsDate} 
+              onChange={(e) => setStatsDate(e.target.value)}
+              min="2024-11-01" max="2024-11-30"
+            />
+          </div>
         </div>
         
         <div className="stats-grid">
@@ -74,29 +100,63 @@ const AdminDashboard = () => {
         </div>
       </section>
 
-      {/* 2. User Management Section */}
       <section className="admin-section">
         <h2>Registered Users</h2>
         
         <div className="filter-bar">
-          <input 
-            type="number" placeholder="Min Age" 
-            onChange={(e) => setFilters({...filters, ageMin: e.target.value})} 
-          />
-          <input 
-            type="number" placeholder="Max Age" 
-            onChange={(e) => setFilters({...filters, ageMax: e.target.value})} 
-          />
-          <input 
-            type="text" placeholder="Pincode" 
-            onChange={(e) => setFilters({...filters, pincode: e.target.value})} 
-          />
-          <select onChange={(e) => setFilters({...filters, vaccinationStatus: e.target.value})}>
-            <option value="">All Statuses</option>
-            <option value={VACCINATION_STATUS.NONE}>None</option>
-            <option value={VACCINATION_STATUS.FIRST_DOSE_COMPLETED}>First Dose</option>
-            <option value={VACCINATION_STATUS.ALL_COMPLETED}>Fully Vaccinated</option>
-          </select>
+          <div className="filter-group">
+            <label>Exact Age</label>
+            <input 
+              type="number" 
+              placeholder="e.g. 30" 
+              value={tempFilters.age}
+              onChange={(e) => setTempFilters({...tempFilters, age: e.target.value})} 
+            />
+          </div>
+          <div className="filter-group">
+            <label>Min Age</label>
+            <input 
+              type="number" 
+              placeholder="Enter min age" 
+              value={tempFilters.ageMin}
+              onChange={(e) => setTempFilters({...tempFilters, ageMin: e.target.value})} 
+            />
+          </div>
+          <div className="filter-group">
+            <label>Max Age</label>
+            <input 
+              type="number" 
+              placeholder="Enter max age" 
+              value={tempFilters.ageMax}
+              onChange={(e) => setTempFilters({...tempFilters, ageMax: e.target.value})} 
+            />
+          </div>
+          <div className="filter-group">
+            <label>Pincode</label>
+            <input 
+              type="text" 
+              placeholder="Enter pincode" 
+              value={tempFilters.pincode}
+              onChange={(e) => setTempFilters({...tempFilters, pincode: e.target.value})} 
+            />
+          </div>
+          <div className="filter-group">
+            <label>Vaccination Status</label>
+            <select 
+              value={tempFilters.vaccinationStatus}
+              onChange={(e) => setTempFilters({...tempFilters, vaccinationStatus: e.target.value})}
+            >
+              <option value="">All Statuses</option>
+              <option value={VACCINATION_STATUS.NONE}>None</option>
+              <option value={VACCINATION_STATUS.FIRST_DOSE_COMPLETED}>First Dose</option>
+              <option value={VACCINATION_STATUS.ALL_COMPLETED}>Fully Vaccinated</option>
+            </select>
+          </div>
+          
+          <div className="filter-actions">
+            <button className="btn-apply" onClick={handleApplyFilters}>Apply Filter</button>
+            <button className="btn-clear" onClick={handleClearFilters}>Clear All</button>
+          </div>
         </div>
 
         <div className="table-wrapper">
