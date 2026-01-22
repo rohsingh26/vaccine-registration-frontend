@@ -3,7 +3,7 @@
 A professional full-stack application built for managing vaccination slots during a 30-day drive (November 2024). This project features a dual-portal system for Users and Administrators with real-time slot management and data filtering.
 
 ## 🚀 Live Deployment
-* **Frontend:** 
+* **Frontend:** [https://vaccine-registration-frontend.vercel.app/](https://vaccine-registration-frontend.vercel.app/)
 * **Backend API:** [https://runo-assignment-vaccine-registration.onrender.com/api](https://runo-assignment-vaccine-registration.onrender.com/api)
 
 ---
