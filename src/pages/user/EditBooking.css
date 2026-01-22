@@ -1,0 +1,79 @@
+.edit-booking-container {
+  padding-top: 3rem;
+  max-width: 800px;
+}
+
+.edit-header h1 {
+  margin: 1rem 0 0.5rem 0;
+  color: var(--text-main);
+}
+
+.warning-note {
+  background: #fff9db;
+  color: #856404;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  border-left: 4px solid #f08c00;
+}
+
+.reschedule-box {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-top: 2rem;
+}
+
+.date-picker-section {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-picker-section input {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.edit-slots-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-slot-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.edit-slot-item:hover {
+  background: #f8f9fa;
+}
+
+.edit-slot-item span {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.btn-select-slot {
+  background: var(--primary);
+  color: white;
+  padding: 8px 20px;
+  font-size: 0.85rem;
+}
+
+.no-data {
+  text-align: center;
+  color: #6b778c;
+  padding: 2rem;
+}

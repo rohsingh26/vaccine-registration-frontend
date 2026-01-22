@@ -1,0 +1,111 @@
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  padding: 20px;
+}
+
+.landing-card {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.landing-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.landing-header p {
+  color: #627d98;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+}
+
+.selection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.portal-card {
+  padding: 2rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.portal-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 20px rgba(0, 82, 204, 0.1);
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  background: #f0f4f8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.portal-card h2 {
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.portal-card p {
+  font-size: 0.9rem;
+  color: #486581;
+  margin-bottom: 1.5rem;
+  height: 45px; /* Keeps buttons aligned */
+}
+
+.btn-portal {
+  width: 100%;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.admin-portal:hover {
+  border-color: var(--admin-color);
+}
+
+.admin-portal:hover .btn-portal {
+  background-color: var(--admin-color);
+}
+
+.landing-footer {
+  margin-top: 2rem;
+  color: #829ab1;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Adds a small space between the two lines */
+}
+
+/* Responsive for Mobile */
+@media (max-width: 600px) {
+  .selection-grid {
+    grid-template-columns: 1fr;
+  }
+}

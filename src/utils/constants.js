@@ -1,0 +1,21 @@
+export const VACCINATION_STATUS = {
+  NONE: "NONE",
+  FIRST_DOSE_COMPLETED: "FIRST_DOSE_COMPLETED",
+  ALL_COMPLETED: "ALL_COMPLETED",
+};
+
+export const DOSE_TYPE = {
+  FIRST: "FIRST",
+  SECOND: "SECOND",
+};
+
+export const BOOKING_STATUS = {
+  BOOKED: "BOOKED",
+  COMPLETED: "COMPLETED",
+  CANCELLED: "CANCELLED",
+};
+
+export const ROLES = {
+  ADMIN: "ADMIN",
+  USER: "USER",
+};

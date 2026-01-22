@@ -1,0 +1,94 @@
+.book-slot-container {
+  padding-top: 2rem;
+}
+
+.booking-header {
+  margin-bottom: 2rem;
+}
+
+.btn-back {
+  background: none;
+  color: var(--primary);
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.date-selector-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.date-input {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.slot-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.slot-card:hover {
+  border-color: var(--primary);
+}
+
+.slot-time {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.slot-capacity {
+  font-size: 0.9rem;
+  color: #6b778c;
+  margin-bottom: 1.5rem;
+}
+
+.slot-capacity .count {
+  color: var(--success);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.btn-book-now {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+}
+
+.no-slots {
+  text-align: center;
+  padding: 3rem;
+  background: #fff;
+  border-radius: 10px;
+  color: #6b778c;
+}
+
+.error-msg {
+  color: var(--error);
+  background: #fff5f5;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--error);
+}
