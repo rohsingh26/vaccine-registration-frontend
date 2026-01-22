@@ -1,16 +1,46 @@
-# React + Vite
+# 🛡️ Vaccine Registration System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional full-stack application built for managing vaccination slots during a 30-day drive (November 2024). This project features a dual-portal system for Users and Administrators with real-time slot management and data filtering.
 
-Currently, two official plugins are available:
+## 🚀 Live Deployment
+* **Frontend:** 
+* **Backend API:** [https://runo-assignment-vaccine-registration.onrender.com/api](https://runo-assignment-vaccine-registration.onrender.com/api)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### **User Portal**
+- **Authentication:** Secure Login/Signup with JWT stored in local storage.
+- **Dynamic Dashboard:** Real-time view of vaccination status (None, First Dose, or Fully Vaccinated).
+- **Slot Booking:** - Users can book Dose 1 or Dose 2.
+  - Automatic logic prevents booking Dose 2 if Dose 1 is not yet completed.
+- **Rescheduling:** Ability to edit or cancel existing appointments.
 
-## Expanding the ESLint configuration
+### **Admin Portal**
+- **Stats Overview:** Daily breakdown of total bookings, Dose 1 counts, and Dose 2 counts for any date in November.
+- **User Management:** Advanced filtering of the user database based on:
+  - Age Range (Min/Max)
+  - Pincode
+  - Vaccination Status
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | React.js (Vite), React Router v6, Axios, Day.js |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas (Mongoose) |
+| **Authentication** | JSON Web Tokens (JWT), BcryptJS |
+| **Deployment** | Render (Backend), Vercel (Frontend) |
+
+---
+
+## 📊 High-Level Architecture
+
+
+
+The application utilizes **Axios Interceptors** to automatically attach JWT tokens to every request, ensuring a seamless and secure communication flow between the client and the protected API routes.
+
