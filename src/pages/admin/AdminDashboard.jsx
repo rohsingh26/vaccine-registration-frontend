@@ -83,7 +83,7 @@ const AdminDashboard = () => {
 
       <section className="admin-section">
         <div className="section-title-row">
-          <h2>Daily Statistics</h2>
+          <h2>Vaccination Statistics</h2>
           <div className="filter-group">
             <label>Select Date</label>
             <input 
