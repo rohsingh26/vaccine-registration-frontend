@@ -27,21 +27,24 @@ const Navbar = () => {
   return (
     <nav className="main-navbar">
       <div className="nav-container">
-        <div className="nav-brand">
-          <span className="brand-logo">💉</span>
-          <span className="brand-name">VaccineDrive</span>
-          <span className={`role-badge ${role.toLowerCase()}`}>
-            {role === 'ADMIN' ? 'Admin Panel' : 'User Portal'}
-          </span>
-          <div className="nav-clock">
-            <span className="clock-icon">🕒</span> {vTime || 'Loading Clock...'}
+        <div className="nav-top-row">
+          <div className="nav-brand">
+            <span className="brand-logo">💉</span>
+            <span className="brand-name">VaccineDrive</span>
+            <span className={`role-badge ${role.toLowerCase()}`}>
+              {role === 'ADMIN' ? 'Admin Panel' : 'User Portal'}
+            </span>
+          </div>
+
+          <div className="nav-actions">
+            <button className="logout-btn" onClick={logout}>Logout</button>
           </div>
         </div>
-
-        <div className="nav-actions">
-          <div className="user-info">
+        <div className="nav-bottom-row">
+          <div className="nav-clock">
+            <span className="clock-icon">🕒</span> 
+            <span className="clock-text">System Time: {vTime || 'Loading...'}</span>
           </div>
-          <button className="logout-btn" onClick={logout}>Logout</button>
         </div>
       </div>
     </nav>
