@@ -97,3 +97,27 @@
     display: none;
   }
 }
+
+.nav-clock {
+  margin-left: 20px;
+  background: #f4f5f7;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #42526e;
+  border: 1px solid #dfe1e6;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clock-icon {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 200px) {
+  .nav-clock {
+    display: none;
+  }
+}

@@ -6,24 +6,40 @@ import './AdminDashboard.css';
 const AdminDashboard = () => {
   const [statsDate, setStatsDate] = useState('2024-11-10');
   const [stats, setStats] = useState(null);
-
   const [users, setUsers] = useState([]);
 
+  const [systemTime, setSystemTime] = useState('');
+  const [newTimeInput, setNewTimeInput] = useState('');
+
   const [filters, setFilters] = useState({
-    age: '',
-    ageMin: '',
-    ageMax: '',
-    pincode: '',
-    vaccinationStatus: ''
+    age: '', ageMin: '', ageMax: '', pincode: '', vaccinationStatus: ''
   });
 
   const [tempFilters, setTempFilters] = useState({
-    age: '',
-    ageMin: '',
-    ageMax: '',
-    pincode: '',
-    vaccinationStatus: ''
+    age: '', ageMin: '', ageMax: '', pincode: '', vaccinationStatus: ''
   });
+
+  const fetchSystemTime = async () => {
+    try {
+      const res = await API.get('/system-time');
+      setSystemTime(res.data.displayTime);
+    } catch (err) {
+      console.error("Time fetch error", err);
+    }
+  };
+
+  const handleUpdateTime = async () => {
+    if (!newTimeInput) return alert("Please select a date and time");
+    try {
+      await API.post('/admin/system-time', { newTime: newTimeInput });
+      alert("System time updated successfully!");
+      fetchSystemTime(); // Refresh the clock
+      fetchUsers();      // Refresh users to see status changes
+      fetchStats();      // Refresh stats
+    } catch (err) {
+      alert("Error updating time");
+    }
+  };
 
   const fetchStats = async () => {
     try {
@@ -44,21 +60,16 @@ const AdminDashboard = () => {
     }
   };
 
-  useEffect(() => { fetchStats(); }, [statsDate]);
+  useEffect(() => { 
+    fetchStats(); 
+    fetchSystemTime();
+  }, [statsDate]);
+
   useEffect(() => { fetchUsers(); }, [filters]);
 
-  const handleApplyFilters = () => {
-    setFilters(tempFilters);
-  };
-
+  const handleApplyFilters = () => setFilters(tempFilters);
   const handleClearFilters = () => {
-    const cleared = {
-      age: '',
-      ageMin: '',
-      ageMax: '',
-      pincode: '',
-      vaccinationStatus: ''
-    };
+    const cleared = { age: '', ageMin: '', ageMax: '', pincode: '', vaccinationStatus: '' };
     setTempFilters(cleared);
     setFilters(cleared);
   };
@@ -102,57 +113,33 @@ const AdminDashboard = () => {
 
       <section className="admin-section">
         <h2>Registered Users</h2>
-        
         <div className="filter-bar">
-          <div className="filter-group">
+           {/* ... existing filter inputs ... */}
+           <div className="filter-group">
             <label>Exact Age</label>
-            <input 
-              type="number" 
-              placeholder="e.g. 30" 
-              value={tempFilters.age}
-              onChange={(e) => setTempFilters({...tempFilters, age: e.target.value})} 
-            />
+            <input type="number" value={tempFilters.age} onChange={(e) => setTempFilters({...tempFilters, age: e.target.value})} />
           </div>
           <div className="filter-group">
             <label>Min Age</label>
-            <input 
-              type="number" 
-              placeholder="Enter min age" 
-              value={tempFilters.ageMin}
-              onChange={(e) => setTempFilters({...tempFilters, ageMin: e.target.value})} 
-            />
+            <input type="number" value={tempFilters.ageMin} onChange={(e) => setTempFilters({...tempFilters, ageMin: e.target.value})} />
           </div>
           <div className="filter-group">
             <label>Max Age</label>
-            <input 
-              type="number" 
-              placeholder="Enter max age" 
-              value={tempFilters.ageMax}
-              onChange={(e) => setTempFilters({...tempFilters, ageMax: e.target.value})} 
-            />
+            <input type="number" value={tempFilters.ageMax} onChange={(e) => setTempFilters({...tempFilters, ageMax: e.target.value})} />
           </div>
           <div className="filter-group">
             <label>Pincode</label>
-            <input 
-              type="text" 
-              placeholder="Enter pincode" 
-              value={tempFilters.pincode}
-              onChange={(e) => setTempFilters({...tempFilters, pincode: e.target.value})} 
-            />
+            <input type="text" value={tempFilters.pincode} onChange={(e) => setTempFilters({...tempFilters, pincode: e.target.value})} />
           </div>
           <div className="filter-group">
             <label>Vaccination Status</label>
-            <select 
-              value={tempFilters.vaccinationStatus}
-              onChange={(e) => setTempFilters({...tempFilters, vaccinationStatus: e.target.value})}
-            >
+            <select value={tempFilters.vaccinationStatus} onChange={(e) => setTempFilters({...tempFilters, vaccinationStatus: e.target.value})}>
               <option value="">All Statuses</option>
               <option value={VACCINATION_STATUS.NONE}>None</option>
               <option value={VACCINATION_STATUS.FIRST_DOSE_COMPLETED}>First Dose</option>
               <option value={VACCINATION_STATUS.ALL_COMPLETED}>Fully Vaccinated</option>
             </select>
           </div>
-          
           <div className="filter-actions">
             <button className="btn-apply" onClick={handleApplyFilters}>Apply Filter</button>
             <button className="btn-clear" onClick={handleClearFilters}>Clear All</button>
@@ -163,12 +150,7 @@ const AdminDashboard = () => {
           <table className="admin-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Age</th>
-                <th>Pincode</th>
-                <th>Aadhar</th>
-                <th>Status</th>
+                <th>Name</th><th>Phone</th><th>Age</th><th>Pincode</th><th>Aadhar</th><th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -188,6 +170,28 @@ const AdminDashboard = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+      {/* System Control Section */}
+      <section className="admin-section system-control-section">
+        <div className="system-card">
+          <div className="system-info">
+            <h2>⚙️ System Control</h2>
+            <p>Current Virtual Time: <strong>{systemTime}</strong></p>
+            <small style={{ color: '#666' }}>* Testing restricted to Nov 2024 slots</small>
+          </div>
+          <div className="system-actions">
+            <input 
+              type="datetime-local" 
+              value={newTimeInput}
+              onChange={(e) => setNewTimeInput(e.target.value)}
+              min="2024-11-01T00:00" 
+              max="2024-11-30T23:59"
+            />
+            <button className="btn-update-time" onClick={handleUpdateTime}>
+              Update System Clock
+            </button>
+          </div>
         </div>
       </section>
     </div>

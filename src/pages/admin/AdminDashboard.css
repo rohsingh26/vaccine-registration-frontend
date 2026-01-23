@@ -58,3 +58,50 @@
   .filter-actions { grid-column: span 1; flex-direction: column; }
   .filter-actions button { width: 100%; }
 }
+
+.system-control-section {
+  background: #fdf2f2;
+  border: 1px dashed #f8d7da;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.system-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.system-info h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #d9534f;
+}
+
+.system-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.system-actions input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.btn-update-time {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-update-time:hover {
+  background: #c9302c;
+}

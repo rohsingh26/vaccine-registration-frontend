@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import API from '../../api/axios';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { user, role, logout } = useAuth();
+  const { role, logout } = useAuth();
+  const [vTime, setVTime] = useState('');
 
-  // If no one is logged in, we don't show the navbar on the landing/auth pages
+  const fetchTime = async () => {
+    try {
+      const res = await API.get('/system-time');
+      setVTime(res.data.displayTime);
+    } catch (err) {
+      console.error("Navbar clock error", err);
+    }
+  };
+
+  useEffect(() => {
+    if (role) {
+      fetchTime();
+    }
+  }, [role]);
+
   if (!role) return null;
 
   return (
@@ -17,19 +33,15 @@ const Navbar = () => {
           <span className={`role-badge ${role.toLowerCase()}`}>
             {role === 'ADMIN' ? 'Admin Panel' : 'User Portal'}
           </span>
+          <div className="nav-clock">
+            <span className="clock-icon">🕒</span> {vTime || 'Loading Clock...'}
+          </div>
         </div>
 
         <div className="nav-actions">
           <div className="user-info">
-            <span className="welcome-text">Welcome,</span>
-            <span className="display-name">
-              {role === 'ADMIN' ? 'Administrator' : 'Citizen'}
-            </span>
           </div>
-          
-          <button className="logout-btn" onClick={logout}>
-            Logout
-          </button>
+          <button className="logout-btn" onClick={logout}>Logout</button>
         </div>
       </div>
     </nav>
